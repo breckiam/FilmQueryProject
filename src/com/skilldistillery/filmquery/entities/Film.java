@@ -1,7 +1,9 @@
 package com.skilldistillery.filmquery.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 
@@ -19,8 +21,14 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actorList;
 	
+	
+	
+	public Film() {
+		super();
+	}
+
 	public Film(int id, String title, String description, int releaseYear, int launguageId, double rentalRate,
-			int length, double replacmentCost, String rating, String specialFeatures) {
+			int length, double replacmentCost, String rating, String specialFeatures, List<Actor> actorList) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -32,8 +40,7 @@ public class Film {
 		this.replacmentCost = replacmentCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
-		DatabaseAccessorObject dbao = new DatabaseAccessorObject();
-		this.actorList = new ArrayList<>(dbao.findActorsByFilmId(id));
+		this.actorList = actorList;
 	}
 	
 	///////////// GETTERS and SETTERS //////////////////
@@ -118,8 +125,17 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 	
-	/////////////////// END GETTERS and SETTERS ////////////////
 	
+	public List<Actor> getActorList() {
+		return actorList;
+	}
+
+	public void setActorList(List<Actor> actorList) {
+		this.actorList = actorList;
+	}
+	
+	/////////////////// END GETTERS and SETTERS ////////////////
+
 	public String filmLanguage() {
 		String lang = "";
 		
@@ -146,7 +162,7 @@ public class Film {
 	public String toString() {
 		return "Film: " + title + ", releaseYear: " + releaseYear
 				+ ", launguage: " + filmLanguage() + ", rating: " + rating 
-				+ "\ndescription: " + description + "\nActor List: " + actorList +"\n";
+				+ "\nSpecial Features: " + specialFeatures + "\ndescription: " + description + "\nActor List: " + actorList +"\n";
 	}
 	
 	

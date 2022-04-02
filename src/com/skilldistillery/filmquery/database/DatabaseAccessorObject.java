@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.database;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,8 +45,20 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			rs = s.executeQuery();
 
 			if (rs.next()) {
-				film = new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"), rs.getInt("release_year"), rs.getInt("language_id"), rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"), rs.getString("rating"), rs.getString("special_features") );
-			}
+				film = new Film();
+				film.setId(rs.getInt("id"));
+				film.setTitle(rs.getString("title"));
+				film.setDescription(rs.getString("description"));
+				film.setReleaseYear(rs.getInt("release_year"));
+				film.setLaunguageId(rs.getInt("language_id"));
+				film.setRentalRate(rs.getDouble("rental_rate"));
+				film.setLength(rs.getInt("length"));
+				film.setReplacmentCost(rs.getDouble("replacement_cost"));
+				film.setRating(rs.getString("rating"));
+				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActorList(findActorsByFilmId(rs.getInt("id")));
+				}
+			
 			rs.close();
 			s.close();
 		} catch (SQLException e) {
@@ -152,6 +165,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actorlist;
 	}
 	
+	
 	public List<Film> findFilmBySearch(String choice) {
 		Connection conn = null;
 		PreparedStatement s = null;
@@ -159,18 +173,32 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Film> filmList = new ArrayList<>();
 		
 		
+		
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
-
+			
 			String sqltxt;
 			sqltxt = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
 			s = conn.prepareStatement(sqltxt);
 			s.setString(1, "%" + choice + "%");
 			s.setString(2, "%" + choice + "%");
 			rs = s.executeQuery();
-
+			
 			while (rs.next()) {
-				filmList.add( new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"), rs.getInt("release_year"), rs.getInt("language_id"), rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"), rs.getString("rating"), rs.getString("special_features")));
+				Film film = new Film();
+				film.setId(rs.getInt("id"));
+				film.setTitle(rs.getString("title"));
+				film.setDescription(rs.getString("description"));
+				film.setReleaseYear(rs.getInt("release_year"));
+				film.setLaunguageId(rs.getInt("language_id"));
+				film.setRentalRate(rs.getDouble("rental_rate"));
+				film.setLength(rs.getInt("length"));
+				film.setReplacmentCost(rs.getDouble("replacement_cost"));
+				film.setRating(rs.getString("rating"));
+				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setActorList(findActorsByFilmId(rs.getInt("id")));
+				
+				
 			}
 			rs.close();
 			s.close();

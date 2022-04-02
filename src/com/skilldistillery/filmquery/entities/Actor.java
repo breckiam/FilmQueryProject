@@ -5,12 +5,19 @@ public class Actor {
 	private String firstName;
 	private String lastName;
 	
+	
+	public Actor() {
+		super();
+	}
+
 	public Actor(int id, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
+	///////////// GETTERS and SETTERS /////////////////
 
 	public int getId() {
 		return id;
@@ -35,6 +42,8 @@ public class Actor {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	////////////// END GETTERS and SETTERS ////////////////
 
 	@Override
 	public String toString() {
