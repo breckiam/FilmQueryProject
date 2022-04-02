@@ -16,7 +16,9 @@ public class FilmQueryApp {
 	public static void main(String[] args) {
 		FilmQueryApp app = new FilmQueryApp();
 //		app.test();
-    app.launch();
+		app.launch();
+		
+		app.kb.close();
 	}
 
 	private void test() {
@@ -69,6 +71,28 @@ public class FilmQueryApp {
 		}
 	}
 
+	private void displaySubMenu(Film film) {
+		System.out.println("1. Display All film details");
+		System.out.println("2. Return to Main Menu");
+		String choice = kb.next();
+		
+		switch(choice) {
+		case "1":
+		case "all":
+		case "details":
+			System.out.println( film.fullDescription());
+			System.out.println();
+			break;
+		case "2":
+		case "main":
+		case "menu":
+			return;
+			default: 
+				System.out.println("Please enter a valid choice...");
+		}
+		
+	}
+
 	private void filmLookupBySearch() {
 		System.out.print("Please enter a search: ");
 		String choice = kb.next();
@@ -77,7 +101,9 @@ public class FilmQueryApp {
 		if(filmList.size() == 0) {
 			System.out.println("No films found for the search \"" + choice + "\"");
 		} else {
-			System.out.println(filmList);
+			for (Film film : filmList) {
+				System.out.println(film);
+			}
 		}
 
 		System.out.println();
@@ -97,6 +123,8 @@ public class FilmQueryApp {
 		}
 
 		System.out.println();
+		
+		displaySubMenu(f);
 	}
 
 }

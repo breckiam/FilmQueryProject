@@ -35,6 +35,8 @@ public class Film {
 		DatabaseAccessorObject dbao = new DatabaseAccessorObject();
 		this.actorList = new ArrayList<>(dbao.findActorsByFilmId(id));
 	}
+	
+	///////////// GETTERS and SETTERS //////////////////
 
 	public int getId() {
 		return id;
@@ -116,6 +118,8 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 	
+	/////////////////// END GETTERS and SETTERS ////////////////
+	
 	public String filmLanguage() {
 		String lang = "";
 		
@@ -129,12 +133,20 @@ public class Film {
 		
 		return lang;
 	}
+	
+	public String fullDescription() {
+		
+		return "Film id: " + id + ", title: " + title  + ", releaseYear: " + releaseYear
+				+ ", launguageId: " + filmLanguage() + ", rentalRate: " + rentalRate + ", length: " + length + ", description: " + description
+				+ ", replacmentCost: " + replacmentCost + ", rating: " + rating + ", specialFeatures: " + specialFeatures
+				+ ",\nActor List: " + actorList ;
+	}
 
 	@Override
 	public String toString() {
-		return "\nFilm: " + title + ", releaseYear: " + releaseYear
+		return "Film: " + title + ", releaseYear: " + releaseYear
 				+ ", launguage: " + filmLanguage() + ", rating: " + rating 
-				+ "\ndescription: " + description + "\nactorList: " + actorList +"\n";
+				+ "\ndescription: " + description + "\nActor List: " + actorList +"\n";
 	}
 	
 	
