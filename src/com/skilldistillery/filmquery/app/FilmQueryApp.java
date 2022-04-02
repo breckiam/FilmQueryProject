@@ -1,10 +1,10 @@
 package com.skilldistillery.filmquery.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
-import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
@@ -47,7 +47,7 @@ public class FilmQueryApp {
 			System.out.println("1. Look up a film by id");
 			System.out.println("2. Look up a film by a search keyword");
 			System.out.println("3. Exit the application");
-			String choice = kb.next();
+			String choice = kb.next().toLowerCase();
 
 			switch (choice) {
 			case "1":
@@ -70,13 +70,24 @@ public class FilmQueryApp {
 	}
 
 	private void filmLookupBySearch() {
-		// TODO Auto-generated method stub
+		System.out.print("Please enter a search: ");
+		String choice = kb.next();
+		List<Film> filmList = dao.findFilmBySearch(choice);
+		
+		if(filmList.size() == 0) {
+			System.out.println("No films found for the search \"" + choice + "\"");
+		} else {
+			System.out.println(filmList);
+		}
+
+		System.out.println();
 
 	}
 
 	private void filmLookupById() {
 		System.out.print("Please enter a film ID: ");
 		int choice = kb.nextInt();
+		kb.nextLine();
 		Film f = dao.findFilmById(choice);
 		
 		if(f == null) {

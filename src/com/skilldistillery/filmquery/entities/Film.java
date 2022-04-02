@@ -115,13 +115,26 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
+	public String filmLanguage() {
+		String lang = "";
+		
+		switch(launguageId) {
+		case 1: lang = "English"; break;
+		case 2: lang = "Spanish"; break;
+		case 3: lang = "Japanese"; break;
+		case 4: lang = "Italian"; break;
+		case 5: lang = "German"; break;
+		}
+		
+		return lang;
+	}
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", launguageId=" + launguageId + ", rentalRate=" + rentalRate + ", length=" + length
-				+ ", replacmentCost=" + replacmentCost + ", rating=" + rating + ", specialFeatures=" + specialFeatures
-				+ "\nactorList=" + actorList + "]";
+		return "\nFilm: " + title + ", releaseYear: " + releaseYear
+				+ ", launguage: " + filmLanguage() + ", rating: " + rating 
+				+ "\ndescription: " + description + "\nactorList: " + actorList +"\n";
 	}
 	
 	

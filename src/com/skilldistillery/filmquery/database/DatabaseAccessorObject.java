@@ -151,5 +151,48 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return actorlist;
 	}
+	
+	public List<Film> findFilmBySearch(String choice) {
+		Connection conn = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+		List<Film> filmList = new ArrayList<>();
+		
+		
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+
+			String sqltxt;
+			sqltxt = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+			s = conn.prepareStatement(sqltxt);
+			s.setString(1, "%" + choice + "%");
+			s.setString(2, "%" + choice + "%");
+			rs = s.executeQuery();
+
+			while (rs.next()) {
+				filmList.add( new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"), rs.getInt("release_year"), rs.getInt("language_id"), rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"), rs.getString("rating"), rs.getString("special_features")));
+			}
+			rs.close();
+			s.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				} 
+				if (s != null) {
+					s.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.err.println(sqle);
+			}
+		}
+		return filmList; 
+	}
 
 }
