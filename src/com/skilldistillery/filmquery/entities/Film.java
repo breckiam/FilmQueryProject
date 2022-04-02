@@ -1,11 +1,7 @@
 package com.skilldistillery.filmquery.entities;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import java.util.Objects;
 
 public class Film {
 	
@@ -20,9 +16,11 @@ public class Film {
 	private String rating; 
 	private String specialFeatures;
 	private List<Actor> actorList;
+	private String category; 
 	
 	
 	
+
 	public Film() {
 		super();
 	}
@@ -134,6 +132,14 @@ public class Film {
 		this.actorList = actorList;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	/////////////////// END GETTERS and SETTERS ////////////////
 
 	public String filmLanguage() {
@@ -162,8 +168,30 @@ public class Film {
 	public String toString() {
 		return "Film: " + title + ", releaseYear: " + releaseYear
 				+ ", launguage: " + filmLanguage() + ", rating: " + rating 
-				+ "\nSpecial Features: " + specialFeatures + "\ndescription: " + description + "\nActor List: " + actorList +"\n";
+				+ "\nSpecial Features: " + specialFeatures
+				+ "\nCategory: " + category
+				+ "\ndescription: " + description 
+				+ "\nActor List: " + actorList +"\n";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		return id == other.id;
+	}
+	
+	
 	
 	
 	
