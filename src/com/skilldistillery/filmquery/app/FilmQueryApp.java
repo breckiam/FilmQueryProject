@@ -118,13 +118,14 @@ public class FilmQueryApp {
 		
 		if(f == null) {
 			System.out.println("No film found for that ID");
+			System.out.println();
 		} else {
 			System.out.println(f);
+			System.out.println();
+			
+			displaySubMenu(f);
 		}
 
-		System.out.println();
-		
-		displaySubMenu(f);
 	}
 	
 	
