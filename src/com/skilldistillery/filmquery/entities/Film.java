@@ -154,20 +154,23 @@ public class Film {
 	
 	public String fullDescription() {
 		
-		return "Film id: " + id + ", title: " + title  + ", releaseYear: " + releaseYear
-				+ ", launguage ID: " + launguageId + ", launguage: " + language + ", rentalRate: " + rentalRate + ", length: " + length + ", description: " + description
-				+ ", replacmentCost: " + replacmentCost + ", rating: " + rating + ", specialFeatures: " + specialFeatures
+		return "\nFilm id: " + id + ", title: " + title  + ", releaseYear: " + releaseYear
+				+ ", launguage ID: " + launguageId + ", launguage: " + language + ", replacmentCost: " + replacmentCost
+				+ ", rentalRate: " + rentalRate + ", length: " + length  + ", rating: " + rating 
+				+ "\nspecial Features: " + specialFeatures
+				+ "\nCategory: " + category
+				+ "\nDescription: " + description
 				+ ",\nActor List: " + actorList ;
 	}
 
 	@Override
 	public String toString() {
-		return "Film: " + title + ", releaseYear: " + releaseYear
+		return "\nFilm: " + title + ", releaseYear: " + releaseYear
 				+ ", launguage: " + language + ", rating: " + rating 
 				+ "\nSpecial Features: " + specialFeatures
 				+ "\nCategory: " + category
 				+ "\ndescription: " + description 
-				+ "\nActor List: " + actorList +"\n";
+				+ "\nActor List: " + actorList;
 	}
 
 	@Override
