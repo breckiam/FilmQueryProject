@@ -20,6 +20,8 @@ This projects truly opened the doors to programming for me. I have been able to 
 
 Along with solidifying some SQL know how, this really helped me piece together using SQL and Java by creating a ORM. Its as simple as modeling your object to "take the same form" as your database table. Then using JDBC, the objects fields then can simply be populated from database records that match the query your looking for. 
 
+I was also able to get some practice writing JUNIT tests on this project, I haven't written too many JUNIT tests yet so I took the opportunity write some for this application to ensure proper function of methods. This helped me solidify my understand of what I takes to write successful JUNIT tests for my projects, I will definitely be trying to implement them in more of my projects know to tipple check my application is really doing what I think its doing. 
+
 ### Sample of Application 
 
 <img src="filmquerySample.png"
