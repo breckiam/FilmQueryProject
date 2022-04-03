@@ -55,8 +55,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacmentCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
-				film.setActorList(findActorsByFilmId(rs.getInt("id")));
-				film.setCategory(findCategory(rs.getInt("id")));
+				film.setActorList(findActorsByFilmId(film.getId()));
+				film.setCategory(findCategory(film.getId()));
+				film.setLanguage(findLanguage(film.getLaunguageId()));
 				}
 			
 			rs.close();
@@ -196,8 +197,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacmentCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
-				film.setActorList(findActorsByFilmId(rs.getInt("id")));
-				film.setCategory(findCategory(rs.getInt("id")));
+				film.setActorList(findActorsByFilmId(film.getId()));
+				film.setCategory(findCategory(film.getId()));
+				film.setLanguage(findLanguage(film.getLaunguageId()));
 				
 				filmList.add(film);
 			}
@@ -234,7 +236,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			conn = DriverManager.getConnection(URL, user, pass);
 			
 			String sqltxt;
-			sqltxt = "SELECT film.title, category.name  FROM film JOIN film_category ON film.id = film_category.film_id JOIN category ON film_category.category_id = category.id where film.id = ?;";
+			sqltxt = "SELECT film.title, category.name  FROM film JOIN film_category ON film.id = film_category.film_id JOIN category ON film_category.category_id = category.id where film.id = ?";
 			s = conn.prepareStatement(sqltxt);
 			s.setInt(1, id);
 			rs = s.executeQuery();
@@ -264,6 +266,48 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		
 		return category;
+	}
+	
+	public String findLanguage(int langId) {
+		String language = null;
+		Connection conn = null;
+		PreparedStatement s = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			
+			String sqltxt;
+			sqltxt = "SELECT l.name FROM language l WHERE l.id = ?";
+			s = conn.prepareStatement(sqltxt);
+			s.setInt(1, langId);
+			rs = s.executeQuery();
+			
+			if (rs.next()) {
+				language = rs.getString("name");
+			}
+			rs.close();
+			s.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				} 
+				if (s != null) {
+					s.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.err.println(sqle);
+			}
+		}
+		
+		return language;
 	}
 
 }

@@ -17,6 +17,7 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actorList;
 	private String category; 
+	private String language; 
 	
 	
 	
@@ -46,9 +47,17 @@ public class Film {
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public String getTitle() {
@@ -142,24 +151,11 @@ public class Film {
 	
 	/////////////////// END GETTERS and SETTERS ////////////////
 
-	public String filmLanguage() {
-		String lang = "";
-		
-		switch(launguageId) {
-		case 1: lang = "English"; break;
-		case 2: lang = "Spanish"; break;
-		case 3: lang = "Japanese"; break;
-		case 4: lang = "Italian"; break;
-		case 5: lang = "German"; break;
-		}
-		
-		return lang;
-	}
 	
 	public String fullDescription() {
 		
 		return "Film id: " + id + ", title: " + title  + ", releaseYear: " + releaseYear
-				+ ", launguageId: " + filmLanguage() + ", rentalRate: " + rentalRate + ", length: " + length + ", description: " + description
+				+ ", launguage ID: " + launguageId + ", launguage: " + language + ", rentalRate: " + rentalRate + ", length: " + length + ", description: " + description
 				+ ", replacmentCost: " + replacmentCost + ", rating: " + rating + ", specialFeatures: " + specialFeatures
 				+ ",\nActor List: " + actorList ;
 	}
@@ -167,7 +163,7 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film: " + title + ", releaseYear: " + releaseYear
-				+ ", launguage: " + filmLanguage() + ", rating: " + rating 
+				+ ", launguage: " + language + ", rating: " + rating 
 				+ "\nSpecial Features: " + specialFeatures
 				+ "\nCategory: " + category
 				+ "\ndescription: " + description 
